@@ -1,0 +1,747 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    transition: width 0.3s ease;
+}
+
+::-webkit-scrollbar-track {
+    background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #fff;
+    border-radius: 4px;
+}
+
+/* Animasi lebar saat scroll */
+html.scrolling::-webkit-scrollbar {
+    width: 10px;
+}
+
+html.scrolling::-webkit-scrollbar-thumb {
+    animation: pulseWidth 0.8s ease-in-out infinite;
+}
+
+@keyframes pulseWidth {
+    0% { transform: scaleX(1); }
+    50% { transform: scaleX(1.2); }
+    100% { transform: scaleX(1); }
+}
+
+/* Firefox */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #fff #000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Ubuntu Mono", monospace;
+    background: #000;
+    overflow-x: hidden;
+}
+
+/* Header (sama seperti sebelumnya) */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 10;
+    transition: transform 0.3s ease;
+}
+
+header.hidden {
+    transform: translateY(-100%);
+}
+
+header.sidebar-active {
+    transform: translateY(0) !important;
+}
+
+.header-logo {
+    width: 130px;
+    height: 50px;
+    cursor: pointer;
+    position: relative;
+    z-index: 30;
+}
+
+.logo-options {
+    position: fixed;
+    top: 70px;
+    left: -200px;
+    width: 200px;
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    transition: left 0.3s ease-in-out;
+}
+
+.logo-options.active {
+    left: 20px;
+}
+
+.option-item {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #000;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.option-item:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+#navigation {
+    background-color: transparent;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+nav ul {
+    width: 100%;
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+nav li {
+    height: 45px;
+}
+
+nav a {
+    position: relative;
+    padding: 25px 30px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    color: black;
+    transition: .5s;
+}
+
+nav a:hover {
+    color: black;
+}
+
+nav a span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    border-bottom: 3px solid #000;
+    border-radius: 15px;
+    transform: scale(0) translateY(50px);
+    transition: .5s;
+}
+
+nav a:hover span {
+    transform: scale(1) translateY(0);
+}
+
+.list-menu-sidebar {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    height: 100vh;
+    width: 250px;
+    z-index: 100;
+    background-color: transparent;
+    backdrop-filter: blur(20px);
+    box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    transition: right 0.3s ease-in-out;
+}
+
+.list-menu-sidebar.active {
+    right: 0;
+}
+
+.list-menu-sidebar .hide-menu {
+    text-align: right;
+    margin-bottom: 20px;
+    display: block;
+    position: relative;
+    top: 0;
+    right: 0;
+    width: auto;
+    z-index: 101;
+}
+
+.list-menu-sidebar .menu-item-sidebar {
+    margin-bottom: 15px;
+}
+
+.list-menu-sidebar a {
+    color: #333333;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    padding: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.list-menu-sidebar a:hover {
+    background-color: #f5f5f5;
+    color: #000000;
+}
+
+.list-menu-sidebar li {
+    width: 100%;
+}
+
+.list-menu-sidebar a {
+    width: 100%;
+    padding: 0;
+    text-align: center;
+    display: block;
+}
+
+.menu-button {
+    display: none;
+}
+
+/* Image Gallery */
+.image-gallery {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.image-slide {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    padding: 20px; /* Padding default untuk desktop */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-slide.active {
+    opacity: 1;
+}
+
+.image-slide img {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Gambar tetap proporsional dan terlihat penuh */
+    object-position: center;
+    display: block;
+    border-radius: 10px;
+}
+
+.copyright {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: #fff;
+    font-size: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+    z-index: 5;
+}
+
+/* Responsivitas untuk Tablet (max-width: 768px) */
+@media (max-width: 768px) {
+    .hideOnMobile {
+        display: none;
+    }
+
+    .menu-button {
+        display: block;
+        position: relative;
+        top: 1em;
+        right: 5%;
+    }
+
+    .hide-menu {
+        position: relative;
+        left: 45%;
+        top: 0;
+        padding-top: 20px;
+    }
+
+    .list-menu-sidebar.active {
+        right: 0;
+    }
+
+    .image-slide {
+        height: 100vh;
+        padding: 15px; /* Padding untuk tablet */
+    }
+
+    .image-slide img {
+        max-height: calc(100vh - 30px); /* Kurangi tinggi untuk padding */
+        width: auto; /* Biarkan lebar menyesuaikan proporsi */
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .copyright {
+        font-size: 0.9rem;
+        bottom: 25px;
+        right: 25px;
+    }
+}
+
+/* Responsivitas untuk HP (max-width: 426px) */
+@media (max-width: 426px) {
+    .list-menu-sidebar {
+        width: 100%;
+        right: -100%;
+        padding: 5px 0;
+    }
+
+    .list-menu-sidebar.active {
+        right: 0;
+    }
+
+    .menu-item-sidebar a {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        row-gap: 2rem;
+    }
+
+    .hide-menu {
+        top: 10px;
+        left: 80%;
+    }
+
+    .image-slide {
+        padding: 10px; /* Padding untuk HP */
+    }
+
+    .image-slide img {
+        max-height: calc(100vh - 20px); /* Kurangi tinggi untuk padding */
+        width: auto;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .copyright {
+        font-size: 0.8rem;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+/* Responsivitas untuk HP kecil (max-width: 376px) */
+@media (max-width: 376px) {
+    .hide-menu {
+        left: 80%;
+        top: -8.5%;
+    }
+
+    .image-slide {
+        padding: 8px;
+    }
+
+    .image-slide img {
+        max-height: calc(100vh - 16px);
+    }
+
+    .copyright {
+        bottom: 16px;
+        right: 16px;
+    }
+}
+
+/* Responsivitas untuk HP sangat kecil (max-width: 321px) */
+@media (max-width: 321px) {
+    .hide-menu {
+        left: 77.5%;
+        top: -8.7%;
+    }
+
+    .image-slide {
+        padding: 5px;
+    }
+
+    .image-slide img {
+        max-height: calc(100vh - 10px);
+    }
+
+    .copyright {
+        bottom: 10px;
+        right: 10px;
+    }
+}
+
+/**************************************** RESPONSIVE 4K ****************************************/
+/* Media Query untuk Layar 4K (3840px atau lebih) */
+@media screen and (min-width: 3840px) {
+    /* Header */
+    header {
+      padding: 20px 40px; /* Padding lebih besar untuk ruang */
+    }
+  
+    .header-logo {
+      width: 200px; /* Logo lebih besar untuk layar besar */
+      height: 80px;
+    }
+  
+    .logo-options {
+      width: 300px; /* Opsi login/signup lebih lebar */
+      top: 100px;
+      left: 40px; /* Sesuaikan posisi */
+    }
+  
+    .option-item {
+      padding: 20px 30px;
+      font-size: 1.5rem; /* Teks lebih besar */
+    }
+  
+    /* Navigasi */
+    nav a {
+      padding: 30px 50px; /* Ruang lebih besar untuk navigasi */
+      font-size: 1.8rem; /* Teks lebih besar */
+    }
+  
+    .list-menu-sidebar {
+      width: 400px; /* Sidebar lebih lebar */
+    }
+  
+    .list-menu-sidebar a {
+      font-size: 1.8rem; /* Teks lebih besar */
+      padding: 15px;
+    }
+  
+    /* Konten Utama */
+    .background-container {
+      height: 100vh; /* Tetap penuh di layar besar */
+    }
+  
+    .welcome-text {
+      font-size: 4rem; /* Teks sambutan lebih besar */
+      text-shadow: 4px 4px 8px rgba(255, 255, 255, 0.5); /* Bayangan lebih jelas */
+    }
+  
+    /* About Us */
+    .aboutUs {
+      padding: 100px 40px; /* Padding lebih besar */
+      min-height: 600px; /* Tinggi minimum lebih besar */
+    }
+  
+    .aboutUs-content {
+      max-width: 1600px; /* Lebar maksimum lebih besar */
+      min-height: 400px;
+    }
+  
+    .aboutUs-title {
+      font-size: 3rem; /* Judul lebih besar */
+    }
+  
+    .aboutUs-text {
+      font-size: 1.8rem; /* Teks lebih besar */
+    }
+  
+    #languageSlider {
+      width: 400px; /* Slider lebih lebar */
+    }
+  
+    #languageSlider::-webkit-slider-thumb,
+    #languageSlider::-moz-range-thumb {
+      width: 30px;
+      height: 30px; /* Thumb lebih besar */
+    }
+  
+    /* E-Magazine */
+    .e-magazine {
+      padding: 150px 40px; /* Padding lebih besar */
+    }
+  
+    .magazine-grid {
+      grid-template-columns: repeat(3, 1fr); /* Tambah kolom untuk 4K */
+      max-width: 2000px; /* Lebar maksimum lebih besar */
+      gap: 40px; /* Jarak antar item lebih besar */
+    }
+  
+    .magazine-item {
+      max-width: 500px; /* Kartu lebih besar */
+    }
+  
+    .magazine-item img {
+      height: 300px; /* Gambar lebih tinggi */
+    }
+  
+    .magazine-item h3 {
+      font-size: 2rem; /* Judul lebih besar */
+    }
+  
+    .magazine-item p {
+      font-size: 1.5rem; /* Teks lebih besar */
+    }
+  
+    /* Student Corner */
+    .student-corner {
+      padding: 100px 40px;
+      min-height: 800px; /* Tinggi minimum lebih besar */
+    }
+  
+    .student-corner-content {
+      max-width: 2000px; /* Lebar maksimum lebih besar */
+    }
+  
+    .student-corner-title {
+      font-size: 3rem;
+    }
+  
+    .student-corner-intro {
+      font-size: 1.8rem;
+    }
+  
+    .competition-grid {
+      grid-template-columns: repeat(4, 1fr); /* Semua item dalam satu baris */
+      gap: 40px;
+      max-width: 1800px;
+    }
+  
+    .competition-item h3 {
+      font-size: 2rem;
+    }
+  
+    .competition-item p {
+      font-size: 1.5rem;
+    }
+  
+    .cta-button {
+      padding: 18px 36px;
+      font-size: 1.5rem;
+    }
+  
+    /* Contact */
+    .contact {
+      padding: 100px 40px;
+      min-height: 700px;
+    }
+  
+    .contact-content {
+      max-width: 2000px;
+    }
+  
+    .contact-title {
+      font-size: 3rem;
+    }
+  
+    .contact-intro {
+      font-size: 1.8rem;
+    }
+  
+    .contact-container {
+      gap: 60px;
+      max-width: 1800px;
+    }
+  
+    .contact-info h3 {
+      font-size: 2rem;
+    }
+  
+    .contact-info p {
+      font-size: 1.5rem;
+    }
+  
+    .form-group input,
+    .form-group textarea {
+      font-size: 1.5rem;
+      padding: 15px;
+    }
+  
+    .form-group textarea {
+      height: 200px;
+    }
+  
+    .submit-button {
+      padding: 18px 36px;
+      font-size: 1.5rem;
+    }
+  
+    /* Footer */
+    .footer-container {
+      max-width: 2000px;
+      padding: 60px 40px;
+      gap: 40px;
+    }
+  
+    .footer-logo {
+      width: 120px;
+    }
+  
+    .footer-brand p {
+      font-size: 1.5rem;
+    }
+  
+    .footer-links h3,
+    .footer-social h3 {
+      font-size: 1.8rem;
+    }
+  
+    .footer-links a {
+      font-size: 1.5rem;
+    }
+  
+    .social-icons a svg {
+      width: 36px;
+      height: 36px;
+    }
+  
+    .footer-bottom p {
+      font-size: 1.5rem;
+    }
+  
+    /* Image Gallery (Student Corner - Art & Lens) */
+    .image-slide img {
+      max-height: 80vh; /* Gambar lebih besar tapi tetap proporsional */
+      width: auto;
+    }
+  
+    .copyright {
+      font-size: 1.5rem;
+      padding: 10px 20px;
+    }
+  
+    /* Gallery Grid (Student Corner - Poem & Story) */
+    .gallery-item {
+      width: 400px; /* Item lebih besar */
+      padding: 20px;
+    }
+  
+    .gallery-item h3 {
+      font-size: 2rem;
+    }
+  
+    .gallery-item p {
+      font-size: 1.5rem;
+    }
+  
+    .overlay-content {
+      max-width: 70%; /* Overlay lebih besar */
+      padding: 40px;
+    }
+  
+    .overlay-content h3 {
+      font-size: 2.5rem;
+    }
+  
+    .overlay-content p {
+      font-size: 1.8rem;
+    }
+  
+    .overlay-content::after {
+      font-size: 2rem;
+      top: 15px;
+      right: 20px;
+    }
+  
+    /* Auth Page */
+    .container {
+      min-height: 100vh;
+    }
+  
+    .signin-signup {
+      width: 40%; /* Form lebih kecil relatif terhadap layar */
+    }
+  
+    .title {
+      font-size: 3rem;
+    }
+  
+    .input-field {
+      height: 70px;
+      max-width: 500px;
+    }
+  
+    .input-field i {
+      font-size: 1.5rem;
+      line-height: 70px;
+    }
+  
+    .input-field input {
+      font-size: 1.5rem;
+    }
+  
+    .btn {
+      width: 200px;
+      height: 60px;
+      font-size: 1.5rem;
+    }
+  
+    .social-icon {
+      width: 60px;
+      height: 60px;
+      font-size: 1.5rem;
+    }
+  
+    .panel h3 {
+      font-size: 2.5rem;
+    }
+  
+    .panel p {
+      font-size: 1.5rem;
+    }
+  
+    .btn.transparent {
+      width: 180px;
+      height: 50px;
+      font-size: 1.2rem;
+    }
+  
+    .auth-footer {
+      font-size: 1.5rem;
+    }
+  }
+  
+  /* Optimasi untuk HiDPI/Retina Displays (termasuk 4K) */
+  @media screen and (min-resolution: 192dpi) {
+    /* Pastikan gambar tajam di layar HiDPI */
+    .header-logo,
+    .footer-logo,
+    .magazine-item img,
+    .image-slide img {
+      image-rendering: crisp-edges; /* Gambar lebih tajam */
+    }
+  
+    /* Sesuaikan teks untuk kepadatan piksel tinggi */
+    body {
+      font-size: 1.2rem; /* Default lebih besar untuk HiDPI */
+    }
+  }
+  
