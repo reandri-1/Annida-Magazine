@@ -217,21 +217,21 @@ window.addEventListener('scroll', () => {
     revealStudentCorner();
 });
 
-// Jalankan animasi saat scroll dan saat halaman dimuat
+// Jalankan animasi saat scroll
 window.addEventListener('scroll', () => {
     revealAboutUs();
-    revealCards();
-    revealEMagazine();
+    revealCards(); // Ganti revealEMagazine dengan revealCards
     revealStudentCorner();
 });
 
+// Jalankan animasi saat halaman dimuat
 window.addEventListener('load', () => {
     updateLanguage(); // Untuk slider About Us
     setInterval(changeLanguage, 2000); // Untuk welcome text
     revealAboutUs();
-    revealEMagazine();
+    revealCards(); // Ganti revealEMagazine dengan revealCards
     revealStudentCorner();
-});
+}); 
 
 //event listener untuk keyboard
 
@@ -263,7 +263,42 @@ window.addEventListener('scroll', () => {
     }, 150); // Animasi berhenti 150ms setelah scroll berhenti
 });
 
-// Animasi kartu menjauhi kursor
+// Overlay untuk E-Magazine ----------------------------------------------------------------------------------------------------
+const overlay = document.getElementById('magazineOverlay');
+const flipbookLink = document.getElementById('flipbookLink');
+const memberLink = document.getElementById('memberLink');
+const cards = document.querySelectorAll('.card[data-edition]');
+
+cards.forEach(card => {
+  card.addEventListener('click', (e) => {
+    e.preventDefault(); // Mencegah perilaku default
+    const edition = card.getAttribute('data-edition');
+    
+    // Atur tautan berdasarkan edisi yang diklik dengan struktur folder baru
+    flipbookLink.setAttribute('href', `e-magazine/flipbook/e-magazine_e${edition}.html`);
+    memberLink.setAttribute('href', `e-magazine/members/e${edition}_members.html`);
+    
+    // Tampilkan overlay
+    overlay.classList.add('active');
+  });
+});
+
+// Tutup overlay saat klik di luar pilihan
+document.addEventListener('click', (e) => {
+  if (overlay.classList.contains('active') && !e.target.classList.contains('overlay-option') && !e.target.closest('.card')) {
+    overlay.classList.remove('active');
+  }
+});
+
+// Tutup overlay dan navigasi ke halaman saat opsi diklik
+document.querySelectorAll('.overlay-option').forEach(option => {
+    option.addEventListener('click', (e) => {
+      overlay.classList.remove('active'); // Tutup overlay
+      // Navigasi akan terjadi secara default karena href sudah diatur
+    });
+  });
+
+// Animasi kartu menjauhi kursor ----------------------------------------------------------------------------------------------------
 document.querySelectorAll('.competition-item').forEach(item => {
     item.addEventListener('mousemove', (e) => {
         const rect = item.getBoundingClientRect(); // Dapatkan posisi dan ukuran kartu
@@ -292,45 +327,43 @@ document.querySelectorAll('.competition-item').forEach(item => {
     });
 });
 
-// Smooth scrolling untuk semua link dengan hash (#)
-// Smooth scrolling
+// Smooth scrolling untuk semua link dengan hash (#) --------------------------------------------------------------------------------------
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        const sidebar = document.querySelector('.list-menu-sidebar');
-        const headerHeight = document.querySelector('header').offsetHeight || 0;
+        const href = this.getAttribute('href');
+        // Hanya proses jika href adalah ID (diawali dengan #)
+        if (href.startsWith('#')) {
+            e.preventDefault();
+            const targetId = href;
+            const targetElement = document.querySelector(targetId);
+            const sidebar = document.querySelector('.list-menu-sidebar');
+            const headerHeight = document.querySelector('header').offsetHeight || 0;
 
-        console.log('Target ID:', targetId);
-        console.log('Target Element:', targetElement);
-
-        if (targetElement) {
-            if (sidebar && sidebar.classList.contains('active')) {
-                const menuButton = document.querySelector('.menu-button');
-                if (menuButton) {
-                    menuButton.focus();
-                }
-                hideSidebar();
-                setTimeout(() => {
+            if (targetElement) {
+                if (sidebar && sidebar.classList.contains('active')) {
+                    const menuButton = document.querySelector('.menu-button');
+                    if (menuButton) {
+                        menuButton.focus();
+                    }
+                    hideSidebar();
+                    setTimeout(() => {
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }, 300);
+                } else {
                     const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
                     window.scrollTo({
                         top: targetPosition,
                         behavior: 'smooth'
                     });
-                    console.log('Scroll triggered to position:', targetPosition);
-                }, 300);
+                }
             } else {
-                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-                console.log('Scroll triggered to position:', targetPosition);
+                console.warn(`Elemen dengan ID ${targetId} tidak ditemukan`);
             }
-        } else {
-            console.warn(`Elemen dengan ID ${targetId} tidak ditemukan`);
         }
+        // Jika bukan hash (misalnya link overlay), biarkan perilaku default
     });
 });
-
