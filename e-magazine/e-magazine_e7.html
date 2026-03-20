@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Edisi 7 - Annida Magazine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Detail Edisi 7 Annida Magazine">
+  <meta name="author" content="Nabil">
+  <link rel="shortcut icon" href="../images/logo/logoannida.png">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* Styling untuk halaman detail */
+    .magazine-detail {
+      min-height: 100vh;
+      background-color: #f5f5f5;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .detail-container {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      position: relative;
+      z-index: 2;
+    }
+
+    .left-section, .right-section {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .left-section {
+      background: url('../images/header-logo/logo annida.png') no-repeat center/cover;
+    }
+
+    .right-section {
+      background: url('../images/header-logo/logo annida (edisi blue).png') no-repeat center/cover;
+    }
+
+    .section-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      z-index: 3;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .section-link {
+      display: block;
+      padding: 10px 20px;
+      margin: 10px 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .section-link:hover {
+      background-color: rgba(51, 51, 51, 0.8);
+    }
+
+    /* Shape Petir (Pakai Gambar) */
+    .lightning-shape {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1500px; /* Rampingkan lebarnya */
+      height: 100%;
+      background: url('../images/lightning.png') no-repeat center/contain;
+      z-index: 10;
+    }
+
+    /* Efek Bayangan */
+    .left-section::after, .right-section::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background: rgba(0, 0, 0, 0.5);
+      transition: height 0.3s ease;
+      z-index: 2;
+    }
+
+    .left-section:hover::after, .right-section:hover::after {
+      height: 150px; /* Bayangan muncul di bagian bawah */
+    }
+
+    /* Responsivitas */
+    @media (max-width: 768px) {
+      .detail-container {
+        flex-direction: column;
+      }
+
+      .left-section, .right-section {
+        height: 50vh;
+      }
+
+      .lightning-shape {
+        width: 100%;
+        height: 40px; /* Rampingkan tinggi di mobile */
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background: url('../images/lightning.png') no-repeat center/contain;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Konten Detail Majalah -->
+  <section class="magazine-detail">
+    <div class="detail-container">
+      <!-- Sisi Kiri: Link ke E-Magazine -->
+      <div class="left-section">
+        <div class="section-content">
+          <h2 class="section-title">Edisi 7</h2>
+          <a href="e-magazine_e7.pdf" class="section-link" target="_blank">Read Magazine (PDF)</a>
+          <a href="e-magazine_e7_digital.html" class="section-link">Digital Version</a>
+        </div>
+      </div>
+
+      <!-- Shape Petir (Pakai Gambar) -->
+      <div class="lightning-shape"></div>
+
+      <!-- Sisi Kanan: Link ke Dewan Redaksi -->
+      <div class="right-section">
+        <div class="section-content">
+          <h2 class="section-title">Editorial Team</h2>
+          <a href="../contributors/editor_e7.html" class="section-link">Editor: Nabil</a>
+          <a href="../contributors/designer_e7.html" class="section-link">Designer: Aisyah</a>
+          <a href="../contributors/writer_e7.html" class="section-link">Writer: Farhan</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="../script.js"></script>
+</body>
+</html>

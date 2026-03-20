@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+	<head>
+		<title>ANNIDA MAGAZINE - student corner</title>
+		<meta name="author" content="Nabil">
+        <meta name="description" content="Organisasi Majalah Islami">
+        <meta name="keyword" content="OSMA, ICBB, Islamic Centre Bin Baz, Abu Nida, Organisasi, Organisasi Santri Madrasah Aliyah, student-corner">
+        <meta charset="UTF-8">
+  		<meta http-equiv="refresh" content="500">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="shortcut icon" href="../images/logo/logoannida.png">
+
+		<!-- STYLESHEET -->
+		<link rel="stylesheet" href="css-sc/sca&l.css">
+
+	</head>
+    <body>
+        <header>
+            <img src="../images/header-logo/logo annida.png" alt="Logo Annida Magazine" class="header-logo" onclick="toggleOptions()" tabindex="0" aria-label="Buka opsi masuk dan daftar">
+            <div class="logo-options" id="logoOptions" role="menu" aria-label="Opsi masuk dan daftar" aria-expanded="false">
+                <a href="../authentication/auth.html#login" class="option-item" role="menuitem">Log In</a>
+                <a href="../authentication/auth.html#signup" class="option-item" role="menuitem">Sign Up</a>
+            </div>
+                <nav id="navigation">
+            
+                    <ul class="list-menu-sidebar" role="navigation" aria-label="Menu navigasi samping" aria-hidden="true">
+                        <li class="hide-menu" role="button" tabindex="0" aria-label="Tutup menu samping">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000" onclick="hideSidebar()">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                            </svg>
+                        </li>
+                        <li class="menu-item-sidebar"><a href="../#student-corner">Student Corner</a></li>
+                        <li class="menu-item-sidebar"><a href="../#student-corner">Lens</a></li>
+                    </ul>
+                    <ul class="list-menu">
+                        <li class="hideOnMobile"><a href="../#student-corner">Student Corner <span></span></a></li>
+                        <li class="hideOnMobile"><a href="../#student-corner">Lens<span></span></a></li>
+                        <li class="menu-button" role="button" tabindex="0" aria-label="Buka menu samping">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000" onclick="showSidebar()">
+                                <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/>
+                            </svg>
+                        </li>
+                     </ul>
+                </nav>
+        </header>
+        <main>
+            <section class="image-gallery">
+                <div class="image-slide">
+                    <img src="../images/header-logo/logo annida (edisi blue).png" alt="Slide 1">
+                    <div class="copyright">Fotografer: Dina</div>
+                </div>
+                <div class="image-slide">
+                    <img src="../images/header-logo/logo annida (edisi orange).png" alt="Slide 2">
+                    <div class="copyright">Fotografer: Budi</div>
+                </div>
+                <div class="image-slide">
+                    <img src="../images/header-logo/logo annida (edisi blue).png" alt="Slide 3">
+                    <div class="copyright">Fotografer: Citra</div>
+                </div>
+                <!-- Tambahkan lebih banyak slide sesuai kebutuhan -->
+            </section>
+        </main>
+    </body>
+    <script src="js-sc/sca&l.js"></script>
+</html>
